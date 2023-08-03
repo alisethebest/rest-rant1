@@ -1,7 +1,7 @@
 const React = require("react");
 const Def = require("../default");
 
-function index(data) {
+function Def(data) {
   let placesFormatted = data.places.map((place) => {
     return (
       <div className="col-sm-6" key={place.id}>
@@ -18,4 +18,4 @@ function index(data) {
   return <div>{placesFormatted}</div>;
 }
 
-module.exports = index;
+module.exports = Def;
