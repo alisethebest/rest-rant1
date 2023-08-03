@@ -24,4 +24,9 @@ places.get('/new', (req, res) => {
 res.render('places/New')
 });
 
+places.post('/', (req, res) => {
+  console.log(req.body);
+  res.send(200);
+});
+
 module.exports = places;
