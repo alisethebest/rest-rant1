@@ -6,6 +6,13 @@ function home() {
     <Def>
       <main>
         <h1>HOME</h1>
+        <div>
+          <img src="/images/Mcdonals.png" alt="Chia Fruit Shake" width="100px" height="100px"/>
+          <div>
+            Photo by <a href="AUTHOR_LINK">Mcdonals</a> on{" "}
+            <a href="UNSPLASH_LINK">internet</a>
+          </div>
+        </div>
         <a href="/places">
           <button className="btn-primary">Places Page</button>
         </a>
@@ -13,6 +20,5 @@ function home() {
     </Def>
   );
 }
-
 
 module.exports = home;
