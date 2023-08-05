@@ -30,15 +30,12 @@ places.get("/:id", (req, res) => {
   let id = Number(req.params.id);
   if (isNaN(id)) {
     res.render("error404");
-  } else if (!places[id]) {
+  } else if (!placeData[id]) {
     res.render("error404");
   } else {
-    res.render("places/show", { place: places[id] });
+    res.render("places/show", { place: placeData[id] });
   }
 });
-
-
-
 
 places.post("/", (req, res) => {
   if (!req.body.pic) {
