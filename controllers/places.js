@@ -1,7 +1,6 @@
 const places = require("express").Router();
 
 const placeData = [
-  // Rename 'places' to 'placeData'
   {
     name: "Chick-fil-a",
     city: "Los Angles",
@@ -19,7 +18,7 @@ const placeData = [
 ];
 
 places.get("/", (req, res) => {
-  res.render("places/index", { places: placeData }); // Pass placeData here
+  res.render("places/index", { places: placeData });
 });
 
 places.get("/new", (req, res) => {
@@ -28,32 +27,52 @@ places.get("/new", (req, res) => {
 
 places.get("/:id", (req, res) => {
   let id = Number(req.params.id);
-  if (isNaN(id)) {
+  console.log("Retrieving place with ID:", id);
+  if (isNaN(id) || !placeData[id]) {
+    console.log(
+      "Error while retrieving place. ID might be incorrect or not exist."
+    );
     res.render("error404");
-  } else if (!placeData[id]) {
-    res.render("error404");
-  } else {
-    res.render("places/show", { place: placeData[id], id: id });
+    return;
   }
+  res.render("places/show", { place: placeData[id], id: id });
 });
 
 places.delete("/:id", (req, res) => {
   let id = Number(req.params.id);
   console.log("Received ID:", id);
-  if (isNaN(id)) {
-    console.log("ID is not a number");
+  if (isNaN(id) || !placeData[id]) {
+    console.log("Error while deleting. ID might be incorrect or not exist.");
     res.render("error404");
-  } else if (!placeData[id]) {
-    console.log("No place found with this ID");
-    res.render("error404");
-  } else {
-    console.log("Deleting place with ID:", id);
-    placeData.splice(id, 1);
-    res.redirect("/places");
+    return;
   }
+  placeData.splice(id, 1);
+  res.redirect("/places");
 });
 
+places.get("/:id/edit", (req, res) => {
+  let id = Number(req.params.id);
+  console.log("Editing place with ID:", id);
+  if (isNaN(id) || !placeData[id]) {
+    console.log("Error while editing. ID might be incorrect or not exist.");
+    res.render("error404");
+    return;
+  }
+ res.render("places/edit", { place: placeData[id], id: id });
+});
 
+places.put("/:id", (req, res) => {
+  let id = Number(req.params.id);
+  console.log("Updating place with ID:", id);
+  if (isNaN(id) || !placeData[id]) {
+    console.log("Error while updating. ID might be incorrect or not exist.");
+    res.render("error404");
+    return;
+  }
+  // Update the placeData with the new info from req.body
+  Object.assign(placeData[id], req.body);
+  res.redirect("/places");
+});
 
 places.post("/", (req, res) => {
   if (!req.body.pic) {
@@ -65,7 +84,7 @@ places.post("/", (req, res) => {
   if (!req.body.state) {
     req.body.state = "USA";
   }
-  placeData.push(req.body); // Use 'placeData' here
+  placeData.push(req.body);
   res.redirect("/places");
 });
 
