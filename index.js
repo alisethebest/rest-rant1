@@ -1,6 +1,7 @@
 // Modules and Globals
 require("dotenv").config();
 const express = require("express");
+const places = require("./controllers/places");
 const app = express();
 
 // Express Settings
@@ -24,4 +25,3 @@ app.get("*", (req, res) => {
 app.listen(3000, function () {
   console.log("Server is running on port 3000");
 });
-
