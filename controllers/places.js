@@ -1,23 +1,25 @@
 const places = require("express").Router();
 
+const placeData = [
+  // Rename 'places' to 'placeData'
+  {
+    name: "Chick-fil-a",
+    city: "Los Angles",
+    state: "CA",
+    cuisines: "fast-food-restaurant",
+    pic: "/images/chick-fil-a.png",
+  },
+  {
+    name: "In-N-Out",
+    city: "La Verne",
+    state: "CA",
+    cuisines: "American-fast-food",
+    pic: "/images/in-n-out.png",
+  },
+];
+
 places.get("/", (req, res) => {
-  const places = [
-    {
-      name: "H-Thai-ML",
-      city: "Seattle",
-      state: "WA",
-      cuisines: "Thai, Pan-Asian",
-      pic: "/images/h-thai-ml-tables.jpg",
-    },
-    {
-      name: "Coding Cat Cafe",
-      city: "Phoenix",
-      state: "AZ",
-      cuisines: "Coffee, Bakery",
-      pic: "/images/coffee-cat.jpg",
-    },
-  ];
-  res.render("places/Index", { places });
+  res.render("places/index", { places: placeData }); // Pass placeData here
 });
 
 places.get("/new", (req, res) => {
@@ -25,8 +27,17 @@ places.get("/new", (req, res) => {
 });
 
 places.post("/", (req, res) => {
-  console.log(req.body);
-  res.send(200);
+  if (!req.body.pic) {
+    req.body.pic = "http://placekitten.com/400/400";
+  }
+  if (!req.body.city) {
+    req.body.city = "Anytown";
+  }
+  if (!req.body.state) {
+    req.body.state = "USA";
+  }
+  placeData.push(req.body); // Use 'placeData' here
+  res.redirect("/places");
 });
 
 module.exports = places;

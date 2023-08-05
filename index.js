@@ -21,5 +21,7 @@ app.get("*", (req, res) => {
   res.render("error404");
 });
 
-// Listen for Connections
-app.listen(process.env.PORT);
+app.listen(3000, function () {
+  console.log("Server is running on port 3000");
+});
+

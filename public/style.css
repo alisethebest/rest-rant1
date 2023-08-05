@@ -2,50 +2,40 @@ h1 {
     text-align: center;
     color: cornflowerblue;
 }
-/* form */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
-    margin: 0;
-    padding: 0;
-}
+/* NAV */
 
-.nice-form {
-    max-width: 400px;
-    margin: 30px auto;
-    background-color: #fff;
-    border-radius: 5px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.form-control {
-    width: 100%;
+nav {
+    background-color: cornflowerblue;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
 }
 
-.btn {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.2s;
+nav ul {
+    list-style-type: none;
+    margin: 0;
 }
 
-.btn:hover {
-    background-color: #0056b3;
+nav li {
+    display: inline;
+    margin-right: 25px;
+}
+
+nav a {
+    color: white;
+    font-size: 1.5em;
+}
+
+nav a:hover {
+    color: pink;
+    text-decoration: none;
+}
+/* body */
+body {
+    background-color: lightblue;
+    text-align: center;
+}
+
+main {
+    margin-right: 20px;
+    margin-left: 20px;
+    background-color: white;
 }
