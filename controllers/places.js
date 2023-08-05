@@ -1,91 +1,52 @@
-const places = require("express").Router();
+const router = require("express").Router();
+const db = require('../models');
+const places = require('../models/places');
 
-const placeData = [
-  {
-    name: "Chick-fil-a",
-    city: "Los Angles",
-    state: "CA",
-    cuisines: "fast-food-restaurant",
-    pic: "/images/chick-fil-a.png",
-  },
-  {
-    name: "In-N-Out",
-    city: "La Verne",
-    state: "CA",
-    cuisines: "American-fast-food",
-    pic: "/images/in-n-out.png",
-  },
-];
-
-places.get("/", (req, res) => {
-  res.render("places/index", { places: placeData });
+router.get("/", (req, res) => {
+  db.Place.find()
+  .then(places => {
+    res.render("places/index", { places });
+  })
+  .catch(err => {
+    console.error(err);
+    res.render("error");
+  }); 
 });
 
-places.get("/new", (req, res) => {
-  res.render("places/New");
+router.post("/", (req, res) => {
+  db.Place.create(req.body)
+    .then(() => {
+      res.redirect("/places");
+    })
+    .catch((err) => {
+      console.error(err);
+      res.render("error");
+    });
 });
 
-places.get("/:id", (req, res) => {
-  let id = Number(req.params.id);
-  console.log("Retrieving place with ID:", id);
-  if (isNaN(id) || !placeData[id]) {
-    console.log(
-      "Error while retrieving place. ID might be incorrect or not exist."
-    );
-    res.render("error404");
-    return;
-  }
-  res.render("places/show", { place: placeData[id], id: id });
+router.get("/new", (req, res) => {
+  res.render("places/new");
 });
 
-places.delete("/:id", (req, res) => {
-  let id = Number(req.params.id);
-  console.log("Received ID:", id);
-  if (isNaN(id) || !placeData[id]) {
-    console.log("Error while deleting. ID might be incorrect or not exist.");
-    res.render("error404");
-    return;
-  }
-  placeData.splice(id, 1);
-  res.redirect("/places");
-});
+router.get("/:id", (req, res) => {
+  res.send("GET /places/:id STUB");
+} );
 
-places.get("/:id/edit", (req, res) => {
-  let id = Number(req.params.id);
-  console.log("Editing place with ID:", id);
-  if (isNaN(id) || !placeData[id]) {
-    console.log("Error while editing. ID might be incorrect or not exist.");
-    res.render("error404");
-    return;
-  }
- res.render("places/edit", { place: placeData[id], id: id });
-});
+router.get("/:id/edit", (req, res) => {
+  res.send("GET /places/:id/edit STUB");
+} );
 
-places.put("/:id", (req, res) => {
-  let id = Number(req.params.id);
-  console.log("Updating place with ID:", id);
-  if (isNaN(id) || !placeData[id]) {
-    console.log("Error while updating. ID might be incorrect or not exist.");
-    res.render("error404");
-    return;
-  }
-  // Update the placeData with the new info from req.body
-  Object.assign(placeData[id], req.body);
-  res.redirect("/places");
-});
+router.put("/:id", (req, res) => {
+  res.send("PUT /places/:id STUB");
+} );
 
-places.post("/", (req, res) => {
-  if (!req.body.pic) {
-    req.body.pic = "http://placekitten.com/400/400";
-  }
-  if (!req.body.city) {
-    req.body.city = "Anytown";
-  }
-  if (!req.body.state) {
-    req.body.state = "USA";
-  }
-  placeData.push(req.body);
-  res.redirect("/places");
-});
+router.delete("/:id/rant/:rantId", (req, res) => {
+  res.send("DELETE /places/:id STUB");
+} );
 
-module.exports = places;
+router.post("/:id/rant", (req, res) => {
+  res.send("POST /places STUB");
+} );
+
+module.exports = router;
+
