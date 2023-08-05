@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const db = require('../models');
-const places = require('../models/places');
 
 router.get("/", (req, res) => {
   db.Place.find()
@@ -29,23 +28,44 @@ router.get("/new", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  res.send("GET /places/:id STUB");
+  db.Place.findById(req.params.id)
+    .then(place => {
+      res.render("places/show", { place });
+    })
+    .catch(err => {
+      console.error(err);
+      res.render("error");
+    });
 } );
 
 router.get("/:id/edit", (req, res) => {
-  res.send("GET /places/:id/edit STUB");
+  db.Place.findById(req.params.id)
+    .then(place => {
+      res.render("places/edit", { place });
+    })
+    .catch(err => {
+      console.error(err);
+      res.render("error");
+    });
 } );
 
 router.put("/:id", (req, res) => {
-  res.send("PUT /places/:id STUB");
+  db.Place.findByIdAndUpdate(req.params.id, req.body)
+    .then(() => {
+      res.redirect("/places");
+    })
+    .catch(err => {
+      console.error(err);
+      res.render("error");
+    });
 } );
 
 router.delete("/:id/rant/:rantId", (req, res) => {
-  res.send("DELETE /places/:id STUB");
+  res.send("DELETE /places/:id/rant/:rantId STUB");
 } );
 
 router.post("/:id/rant", (req, res) => {
-  res.send("POST /places STUB");
+  res.send("POST /places/:id/rant STUB");
 } );
 
 module.exports = router;
