@@ -33,9 +33,27 @@ places.get("/:id", (req, res) => {
   } else if (!placeData[id]) {
     res.render("error404");
   } else {
-    res.render("places/show", { place: placeData[id] });
+    res.render("places/show", { place: placeData[id], id: id });
   }
 });
+
+places.delete("/:id", (req, res) => {
+  let id = Number(req.params.id);
+  console.log("Received ID:", id);
+  if (isNaN(id)) {
+    console.log("ID is not a number");
+    res.render("error404");
+  } else if (!placeData[id]) {
+    console.log("No place found with this ID");
+    res.render("error404");
+  } else {
+    console.log("Deleting place with ID:", id);
+    placeData.splice(id, 1);
+    res.redirect("/places");
+  }
+});
+
+
 
 places.post("/", (req, res) => {
   if (!req.body.pic) {
