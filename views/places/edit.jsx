@@ -1,13 +1,17 @@
 const React = require("react");
 const Def = require("../default.jsx");
 
-function edit_form (data) {
+function edit_form(data) {
   return (
     <Def>
       <main>
         <h1>Edit Place</h1>
-        <form method="POST" action={`/places/${data.id}?_method=PUT`}>
-          <div className="form-group">
+        <form
+          method="POST"
+          action={`/places/${data.id}?_method=PUT`}
+          style={{ maxWidth: "500px", margin: "0 auto" }}
+        >
+          <div className="form-group" style={{ marginBottom: "20px" }}>
             <label htmlFor="name">Place Name</label>
             <input
               className="form-control"
@@ -15,33 +19,52 @@ function edit_form (data) {
               name="name"
               value={data.place.name}
               required
+              style={{ padding: "10px" }}
             />
           </div>
-          <div className="form-group">
+          <div className="form-group" style={{ marginBottom: "20px" }}>
             <label htmlFor="pic">Place Picture</label>
-            <input className="form-control" type="url" id="pic" name="pic" />
+            <input
+              className="form-control"
+              type="url"
+              id="pic"
+              name="pic"
+              style={{ padding: "10px" }}
+            />
           </div>
-          <div className="form-group">
+          <div className="form-group" style={{ marginBottom: "20px" }}>
             <label htmlFor="city">City</label>
-            <input className="form-control" id="city" name="city" />
+            <input
+              className="form-control"
+              id="city"
+              name="city"
+              style={{ padding: "10px" }}
+            />
           </div>
-          <div className="form-group">
+          <div className="form-group" style={{ marginBottom: "20px" }}>
             <label htmlFor="state">State</label>
-            <input className="form-control" id="state" name="state" />
+            <input
+              className="form-control"
+              id="state"
+              name="state"
+              style={{ padding: "10px" }}
+            />
           </div>
-          <div className="form-group">
+          <div className="form-group" style={{ marginBottom: "20px" }}>
             <label htmlFor="cuisines">Cuisines</label>
             <input
               className="form-control"
               id="cuisines"
               name="cuisines"
               required
+              style={{ padding: "10px" }}
             />
           </div>
           <input
             className="btn btn-primary"
             type="submit"
             value="Update Place"
+            style={{ padding: "10px 15px", fontSize: "16px" }}
           />
         </form>
       </main>
@@ -50,4 +73,3 @@ function edit_form (data) {
 }
 
 module.exports = edit_form;
-
