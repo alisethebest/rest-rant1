@@ -35,12 +35,14 @@ router.get("/new", (req, res) => {
 
 router.get("/:id", (req, res) => {
   db.Place.findById(req.params.id)
+    .populate("comments")
     .then((place) => {
+      console.log(place.comments);
       res.render("places/show", { place });
     })
     .catch((err) => {
-      console.error(err);
-      res.render("error");
+      console.log("err", err);
+      res.render("error404");
     });
 });
 

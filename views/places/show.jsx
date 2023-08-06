@@ -15,7 +15,25 @@ function show(data) {
       maxWidth: "500px",
     },
   };
-
+ let comments = (
+  <h3 className="inactive">
+    No comments yet!
+  </h3>
+ )
+ if (data.place.comments.length) {
+   comments = data.place.comments.map((c) => {
+     return (
+       <div className="border">
+         <h2 className="rant">{c.rant ? "Rant! ðŸ˜¡" : "Rave! ðŸ˜»"}</h2>
+         <h4>{c.content}</h4>
+         <h3>
+           <stong>- {c.author}</stong>
+         </h3>
+         <h4>Rating: {c.stars}</h4>
+       </div>
+     );
+   });
+ }
   return (
     <Def>
       <main>
@@ -24,22 +42,16 @@ function show(data) {
         <h3>
           Located in {data.place.city}, {data.place.state}
         </h3>
-        <h2>
-          Description
-        </h2>
-        <h3>
-          {data.place.showEstablished()}
-        </h3>
-        <h4>
-          Serving {data.place.cuisines}
-        </h4>
+        <h2>Description</h2>
+        <h3>{data.place.showEstablished()}</h3>
+        <h4>Serving {data.place.cuisines}</h4>
         <section style={styles.section}>
           <h2>Rating</h2>
           <p>Currently unrated.</p>
         </section>
         <section style={styles.section}>
           <h2>Comments</h2>
-          <p>No comments yet!</p>
+          {comments}
         </section>
         <section style={styles.section}>
           <a href={`/places/${data.id}/edit`} className="btn btn-warning">
