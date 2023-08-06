@@ -1,4 +1,4 @@
-const db = require("../models/places");
+const db = require("../models");
 
 db.Place.create([
   {
@@ -16,13 +16,14 @@ db.Place.create([
     cuisines: "Coffee, Bakery",
     pic: "/images/coffee-cat.jpg",
     founded: 2020,
-  },
-])
+  },])
+
   .then(() => {
     console.log("Success!");
     process.exit();
   })
   .catch((err) => {
+    console.error(err)
     console.log("Failure!", err);
     process.exit();
   });

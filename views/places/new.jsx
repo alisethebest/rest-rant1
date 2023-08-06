@@ -1,16 +1,28 @@
 const React = require("react");
 const Def = require("../default");
 
-function New() {
+function New(data) {
+  let message = "";
+  if (data.message) {
+    message = <h4 className="alert alert-danger">{data.message}</h4>;
+  }
+
   return (
     <Def>
       <main>
         <h1>Add a New Place</h1>
+        {message}
         <link rel="stylesheet" href="style.css" />
         <form method="POST" action="/places">
-          <div className="form-group">
-            <label for="founded">Founded Year</label>
-            <input className="form-control" id="founded" name="founded" />
+          <div className="form-group col-sm-4">
+            <label htmlFor="founded">Founded Year</label>
+            <input
+              type="number"
+              className="form-control"
+              id="founded"
+              name="founded"
+              value={new Date().getFullYear()}
+            />
           </div>
           <div className="form-group">
             <label htmlFor="name">Place Name</label>
