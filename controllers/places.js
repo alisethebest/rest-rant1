@@ -14,19 +14,20 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
+  if (!req.body.pic) {
+    req.body.pic = "http://placekitten.com/400/400";
+  }
+
   db.Place.create(req.body)
     .then(() => {
       res.redirect("/places");
     })
     .catch((err) => {
-      if (err && err.name == "ValidationError") {
-        let message = "Validation Error: " + err.message; 
-        res.render("places/new", { message });
-      } else {
-        res.render("error404");
-      }
+      console.log("err", err);
+      res.render("error404");
     });
 });
+
 
 router.get("/new", (req, res) => {
   res.render("places/new");
