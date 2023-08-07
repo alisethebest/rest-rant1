@@ -8,19 +8,36 @@ function show(data) {
 
   let comments = <h3 className="inactive">No comments yet!</h3>;
   if (data.place.comments.length) {
-    comments = data.place.comments.map((c) => {
-      return (
-        <div className="border">
-          <h2 className="rant">{c.rant ? "Rant! 😡" : "Rave! 😃"}</h2>
-          <h4>{c.content}</h4>
-          <h3>
-            <strong>- {c.author}</strong>
-          </h3>
-          <h4>Rating: {c.stars}</h4>
-        </div>
-      );
-    });
+    comments = data.place.comments.map((c) => (
+      <div className="border">
+        <h2 className="rant">{c.rant ? "Rant! 😡" : "Rave! 😃"}</h2>
+        <h4>{c.content}</h4>
+        <h3>
+          <strong>- {c.author}</strong>
+        </h3>
+        <h4>Rating: {c.stars}</h4>
+      </div>
+    ));
   }
+
+  let rating = <h3 className="inactive">NOT YET RATED</h3>;
+
+  if (data.place.comments.length) {
+  let sumRatings = data.place.comments.reduce((tot, c) => {
+    return tot + c.stars
+  }, 0)
+  let averageRating = Math.round(sumRatings / data.place.comments.length)
+  let stars = ''
+  for (let i = 0; i < averageRating; i++) {
+    stars += 'â­ï¸'
+  }
+  rating = (
+    <h3>
+      {stars} Stars
+    </h3>
+  )
+    rating = <h3>{averageRating.toFixed(2)} stars</h3>;
+}
 
   return (
     <Def>
@@ -36,7 +53,7 @@ function show(data) {
 
         <section style={styles.section}>
           <h2>Rating</h2>
-          <p>Currently unrated.</p>
+          {rating}
         </section>
 
         <section style={styles.section}>

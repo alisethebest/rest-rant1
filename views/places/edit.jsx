@@ -8,7 +8,7 @@ function edit_form(data) {
         <h1>Edit Place</h1>
         <form
           method="POST"
-          action={`/places/${data.id}?_method=PUT`}
+          action={`/places/${data.place.id}?_method=PUT`}
           style={{ maxWidth: "500px", margin: "0 auto" }}
         >
           <div className="form-group" style={{ marginBottom: "20px" }}>
@@ -20,6 +20,15 @@ function edit_form(data) {
               value={data.place.name}
               required
               style={{ padding: "10px" }}
+            />
+          </div>
+          <div className="form-group col-sm-4">
+            <label htmlFor="founded">Founded</label>
+            <input
+              className="form-control"
+              id="founded"
+              name="founded"
+              value={data.place.founded}
             />
           </div>
           <div className="form-group" style={{ marginBottom: "20px" }}>

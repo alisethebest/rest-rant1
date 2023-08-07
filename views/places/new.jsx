@@ -14,6 +14,10 @@ function New(data) {
         {message}
         <link rel="stylesheet" href="style.css" />
         <form method="POST" action="/places">
+          <div className="form-group">
+            <label htmlFor="name">Place Name</label>
+            <input className="form-control" id="name" name="name" required />
+          </div>
           <div className="form-group col-sm-4">
             <label htmlFor="founded">Founded Year</label>
             <input
@@ -21,12 +25,8 @@ function New(data) {
               className="form-control"
               id="founded"
               name="founded"
-              value={new Date().getFullYear()}
+              defaultValue={new Date().getFullYear()}
             />
-          </div>
-          <div className="form-group">
-            <label htmlFor="name">Place Name</label>
-            <input className="form-control" id="name" name="name" required />
           </div>
           <div className="form-group">
             <label htmlFor="pic">Place Picture</label>
@@ -49,6 +49,30 @@ function New(data) {
               required
             />
           </div>
+
+          {/* New fields for Comment and Rating */}
+          <div className="form-group">
+            <label htmlFor="comment">Comment</label>
+            <textarea
+              className="form-control"
+              id="comment"
+              name="comment"
+              rows="4"
+            ></textarea>
+          </div>
+          <div className="form-group">
+            <label htmlFor="stars">Star Rating</label>
+            <input
+              type="number"
+              className="form-control"
+              id="stars"
+              name="stars"
+              step="0.5"
+              min="0"
+              max="5"
+            />
+          </div>
+
           <input className="btn btn-primary" type="submit" value="Add Place" />
         </form>
       </main>
