@@ -2,20 +2,20 @@ const db = require("../models");
 
 db.Place.create([
   {
-    name: "H-Thai-ML",
-    city: "Seattle",
-    state: "WA",
-    cuisines: "Thai, Pan-Asian",
-    pic: "/images/h-thai-ml-tables.jpg",
-    founded: 1989,
+    name: "In-N-Out Burger",
+    city: "Los Angeles",
+    state: "CA",
+    cuisines: "Burgers, Fries, Shakes",
+    pic: "/images/in-n-out.png",
+    founded: 1948,
   },
   {
-    name: "Coding Cat Cafe",
-    city: "Phoenix",
-    state: "AZ",
-    cuisines: "Coffee, Bakery",
-    pic: "/images/coffee-cat.jpg",
-    founded: 2020,
+    name: "Chick-fil-a",
+    city: "Los Angeles",
+    state: "CA",
+    cuisines: "Chicken Sandwiches, Waffle Fries, Lemonade",
+    pic: "/images/chick-fil-a.png",
+    founded: 1946,
   },])
 
   .then(() => {
